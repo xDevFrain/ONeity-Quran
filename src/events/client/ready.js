@@ -1,7 +1,7 @@
 const ControlData = require('@utils/functions/ControlData');
 const joinAndPlayQuran = require('@utils/functions/joinAndPlayQuran');
 const chalk = require('chalk');
-const { ActivityType, } = require('discord.js');
+const { ActivityType, Guild, } = require('discord.js');
 const gr = chalk.hex('#00D100');
 const un = chalk.underline;
 
@@ -27,18 +27,20 @@ module.exports = {
     setTimeout(() => client.user.setStatus("online"), 40000);
     setInterval(() => {
       let ServersStatus = client.Radio.size
-      client.user.setActivity({ name: `in 1 Server`, type: ActivityType.Listening })
+      client.user.setActivity({ name: `in ${ServersStatus} Server`, type: ActivityType.Listening })
     }, 1 * 1000 * 60);
 
     let RadioChannels = await client.db.table("channels").values() || [];
     if (RadioChannels.length === 0) return
+
     setTimeout(async () => {
       const sleep = (ms) => new Promise(resolve => setTimeout(resolve, ms));
       // if (process.env.testMode) return console.log("stop run radio is test mode".red);
       for (let data of RadioChannels) {
         if (data.enabled) {
           await sleep(500)
-          let guild = await client.guilds.fetch(data.guildId).catch(e => null)
+          /**@type {Guild} */
+          let guild = await client.guilds.fetch(data.guildId).catch(() => null)
           if (!guild?.id) continue
           let conn = await joinAndPlayQuran(client, data.channelId, guild, data.url)
           if (conn === null) {
@@ -61,6 +63,7 @@ module.exports = {
 
       }
     }, 1000);
+
 
   },
 };
