@@ -66,12 +66,7 @@ module.exports = {
           },
           {
             name: "Developer | المطور",
-            value: `**${require('../../../package.json').author.name}**`,
-            inline: false
-          },
-          {
-            name: "Developer github | حساب المطور",
-            value: `**${require('../../../package.json').author.url}**`,
+            value: `**<@244870116905320458>**`,
             inline: false
           },
         ])
