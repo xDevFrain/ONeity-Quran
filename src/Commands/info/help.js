@@ -30,7 +30,7 @@ function help(interaction) {
     .setStyle("Link")
     .setLabel("Invite Me")
   let btnSupport = new ButtonBuilder()
-    .setURL("https://discord.gg/devxor")
+    .setURL("https://discord.gg/6w9taHqemk")
     .setStyle("Link")
     .setLabel("Support Server")
   let btnStatus = new ButtonBuilder()
