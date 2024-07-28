@@ -1,19 +1,20 @@
-const { ButtonStyle, ButtonBuilder, ActionRowBuilder, ModalBuilder, TextInputBuilder, TextInputStyle, ModalSubmitInteraction, ChannelType } = require("discord.js");
+const { ButtonStyle, ButtonBuilder, ActionRowBuilder, ModalBuilder, TextInputBuilder, TextInputStyle, ChannelType } = require("discord.js");
 
 /**
  * @type {import("@utils/types/baseComponent")}
  */
 module.exports = {
-  name: "Modal_set_RadioChannel",
+  name: "set_RadioChannel",
   enabled: true,
   /**
-   * @param {ModalSubmitInteraction} interaction 
+   * @param {import("discord.js").ChannelSelectMenuInteraction} interaction 
    */
   async action(client, interaction, parts, lang) {
     try {
-      let channelId = interaction.fields.getTextInputValue("RadioChannel").trim()
 
-      let channel = await interaction.guild.channels.fetch(channelId).catch(e => null) || interaction.guild.channels.cache.find(ch => ch.name === channelId)
+      // let channelId = interaction.fields.getTextInputValue("RadioChannel").trim()
+
+      let channel = interaction.channels.first() //await interaction.guild.channels.fetch(channelId).catch(e => null) || interaction.guild.channels.cache.find(ch => ch.name === channelId)
       if (!channel) return interaction.reply({
         content: "❌ | لم يتم العثور علي القناه الصوتيه",
         ephemeral: true
@@ -33,7 +34,9 @@ module.exports = {
           channelId: channel.id,
           guildId: interaction.guildId,
           url: data?.url || "http://n02.radiojar.com/v33ay8543d0uv?rj-ttl=5&rj-tok=AAABgDTqH90AIyBNaL5t4qE1IA",
-          enabled: false
+          enabled: data?.enabled || false,
+          ch: data?.ch || null,
+          msgId: data?.msgId || null
         })
 
         interaction.reply({
