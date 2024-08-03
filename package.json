@@ -5,18 +5,29 @@
   "scripts": {
     "start": "node index"
   },
-  "author": "Frain [ONeity-Team]",
+ "repository": {
+    "type": "git",
+    "url": "git+https://github.com/xDevFrain/ONeity-Quran.git"
+  },
+  "author": {
+    "name": "Frain [ONeity-Team]",
+    "url": "https://github.com/xDevFrain"
+  },
   "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/xDevFrain/ONeity-Quran/issues"
+  },
+  "homepage": "https://github.com/xDevFrain/ONeity-Quran#readme",
   "dependencies": {
     "@discordjs/voice": "^0.17.0",
     "ascii-table": "^0.0.9",
-    "axios": "^1.7.2",
+    "axios": "^1.7.3",
     "chalk": "^4.1.2",
     "colors": "^1.4.0",
     "discord.js": "^14.15.3",
     "dotenv": "^16.4.5",
     "ffmpeg-static": "^5.2.0",
-    "good.db": "^2.4.4",
+    "good.db": "^2.4.5",
     "libsodium-wrappers": "^0.7.14",
     "module-alias": "^2.2.3",
     "moment": "^2.30.1",
