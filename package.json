@@ -5,7 +5,7 @@
   "scripts": {
     "start": "node index"
   },
- "repository": {
+  "repository": {
     "type": "git",
     "url": "git+https://github.com/xDevFrain/ONeity-Quran.git"
   },
