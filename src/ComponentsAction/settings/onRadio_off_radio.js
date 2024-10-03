@@ -41,6 +41,13 @@ module.exports = {
 
       } else {
         let conn = client.Radio.get(`${interaction.guildId}`);
+        if (!conn) {
+          client.Radio.delete(`${interaction.guildId}`);
+
+          await db.set(`${interaction.guildId}_radioChannel..enabled`, false);
+          client.Radio.delete(`${interaction.guildId}`);
+          return
+        }
         conn.player.stop(true);
         conn.destroy();
         // interaction.followUp({ content: "✅ | تم ايقاف الراديو", ephemeral: true })
