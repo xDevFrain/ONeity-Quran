@@ -16,7 +16,7 @@ let client = new Quran({
   database: {
     database_type: "MONGODB",
     MongoDB: {
-      uri: process.env.mongodb_uri
+      uri: process.env.mongodb_url
     },
     options: {
       nested: '..',
