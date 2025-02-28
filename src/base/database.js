@@ -1,15 +1,9 @@
-const fs = require('fs');
+const { GoodDB, JSONDriver, MongoDBDriver, SQLiteDriver, MySQLDriver } = require("good.db");
 const path = require('path');
 
-const databaseFolder = path.join(__dirname, '../../database');
-if (!fs.existsSync(databaseFolder)) {
-  fs.mkdirSync(databaseFolder, { recursive: true });
-}
+let db_josn_path = path.join(__dirname, '../../database/database.json')
+let db_Sqlite_path = path.join(__dirname, '../../database/database.sqlite')
 
-const { GoodDB, JSONDriver, MongoDBDriver, SQLiteDriver, MySQLDriver } = require("good.db");
-
-let db_josn_path = path.join(databaseFolder, 'database.json');
-let db_Sqlite_path = path.join(databaseFolder, 'database.sqlite');
 
 class GDB extends GoodDB {
   /**
@@ -19,10 +13,12 @@ class GDB extends GoodDB {
    * @param {import("@ONeity/ONeity").DataBase} db_option
    */
   constructor(driver, options, db_option) {
-    if (db_option?.options) options = db_option.options;
-    super(driver, options);
-  }
-}
+    if (db_option?.options) options = db_option.options
+    super(driver, options)
+
+
+  };
+};
 
 module.exports = class DB {
   /**
@@ -30,8 +26,7 @@ module.exports = class DB {
    */
   static db_default(db_option) {
     return new GDB(new JSONDriver({
-      path: db_josn_path, 
-      format: true
+      path: db_josn_path, format: true
     }), {
       nested: "..",
       nestedIsEnabled: true,
@@ -40,7 +35,8 @@ module.exports = class DB {
         capacity: 1024,
         isEnabled: true,
       }
-    }, db_option);
+    }
+      , db_option);
   };
 
   /**
@@ -58,6 +54,7 @@ module.exports = class DB {
         isEnabled: true,
       }
     }, db_option);
+
   };
 
   /**
@@ -74,10 +71,9 @@ module.exports = class DB {
       }
     }, db_option);
   };
-
   /**
-   * @param {import("@ONeity/ONeity").DataBase} db_option
-   */
+  * @param {import("@ONeity/ONeity").DataBase} db_option
+  */
   static db_mysql(db_option) {
     return new GDB(new MySQLDriver(db_option?.MySQL), {
       nested: "..",
