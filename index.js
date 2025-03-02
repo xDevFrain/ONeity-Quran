@@ -64,6 +64,7 @@ require("module-alias/register");
 require("colors");
 const { registerFont } = require('canvas');
 const fontFile = './src/utils/fonts/Amiri-Regular.ttf';
+const keep_alive = require('./keep_alive.js');
 
 registerFont(fontFile, { family: 'Amiri' });
 
